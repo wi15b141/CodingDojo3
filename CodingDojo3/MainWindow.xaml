@@ -7,6 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="239*"/>
+            <RowDefinition Height="43*"/>
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" AutoGenerateColumns="False"
+            ItemsSource= "{Binding Items}"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name"/>
+                <DataGridTextColumn Header="Group"/>
+                <DataGridTextColumn Header="Salesprice"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="5,0" Width="120" ItemsSource="{Binding Currencies}" SelectedItem="{Binding SelectedCurrency}"/>
+
     </Grid>
 </Window>
