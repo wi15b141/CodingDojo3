@@ -4,8 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodingDojo3"
+        xmlns:vm="clr-namespace:CodingDojo3.ViewModel"
+        xmlns:Converters="clr-namespace:CodingDojo3.Converters" 
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <vm:MainViewModel></vm:MainViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+        <Converters:IntTobrushConverter x:Key="converter" />
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="33*"/>
@@ -16,9 +25,17 @@
             ItemsSource= "{Binding Items}"
                   >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name"/>
-                <DataGridTextColumn Header="Group"/>
-                <DataGridTextColumn Header="Salesprice"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Group" Binding="{Binding Group}"/>
+                <DataGridTextColumn Header="SalesPrice" Binding="{Binding SalesPrice}"/>
+                <DataGridTextColumn Header="PurchasePrice" Binding="{Binding PurchasePrice}"/>
+                <DataGridTemplateColumn Header="OnStock">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Ellipse Height="15" Width="15" Fill="{Binding OnStock, Converter={StaticResource converter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="5,0" Width="120" ItemsSource="{Binding Currencies}" SelectedItem="{Binding SelectedCurrency}"/>
