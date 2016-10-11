@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using CodingDojo4DataLib;
 using System.Collections.ObjectModel;
 using CodingDojo4DataLib.Converter;
+using System.Windows;
+using CodingDojo3.Dataoperations;
 
 namespace CodingDojo3.ViewModel
 {
@@ -22,14 +24,14 @@ namespace CodingDojo3.ViewModel
             set
             {
                 selectedCurrency = value;
-                OnChange("SelectedCurrency");
+                //OnChange("SelectedCurrency");
                 this.DoCalculation();
             }
         }
 
         private void DoCalculation()
         {
-            foreach (var item in Items)
+            foreach (var item in Items1)
             {
                 //item.CalculateSalesPriceFromEuro(SelectedCurrency);
             }
@@ -39,10 +41,12 @@ namespace CodingDojo3.ViewModel
         private ObservableCollection<StockEntryViewModel> items = new ObservableCollection<StockEntryViewModel>();
         private Currencies selectedCurrency;
 
-        public ObservableCollection<StockEntryViewModel> Items
+        public ObservableCollection<StockEntryViewModel> Items1
         {
             get { return items; }
-            set { items = value; }
+            set { items = value;
+               
+            }
         }
 
     
@@ -50,13 +54,39 @@ namespace CodingDojo3.ViewModel
         {
             SampleManager manager = new SampleManager();
             stock = manager.CurrentStock.OnStock;
+            Dataoperations.Dataoperation dop = new Dataoperation();
 
             foreach (var item in stock)
             {
 
-                Items.Add(new StockEntryViewModel(item));
+                Items1.Add(new StockEntryViewModel(item));
 
             }
+           // Items1.Add(new StockEntryViewModel(dop.add_new_item()));
         }
+
+      
+
+        public void add_item()
+        {
+
+
+
+                SampleManager manager = new SampleManager();
+                stock = manager.CurrentStock.OnStock;
+                Dataoperations.Dataoperation dop = new Dataoperation();
+
+                /*foreach (var item in stock)
+                {
+
+                    Items1.Add(new StockEntryViewModel(item));
+
+                }*/
+                Items1.Add(new StockEntryViewModel(dop.add_new_item()));
+                
+           
+        }
+         
+       
     }
 }
