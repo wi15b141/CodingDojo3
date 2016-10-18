@@ -12,7 +12,7 @@ namespace CodingDojo3.Converters
     public class IntTobrushConverter : IValueConverter
     {
         Brush red = new SolidColorBrush(Colors.Red);
-        Brush yellow = new SolidColorBrush(Colors.Yellow);
+        Brush orange = new SolidColorBrush(Colors.Orange);
         Brush green = new SolidColorBrush(Colors.Green);
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -20,7 +20,7 @@ namespace CodingDojo3.Converters
             int val = (int)value;
             if (val > 20) { return green; }
             else if (val < 10) { return red; }
-            else { return yellow; }
+            else { return orange; }
 
             throw new NotImplementedException();
         }

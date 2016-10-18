@@ -4,18 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodingDojo4DataLib;
+using CodingDojo4DataLib.Converter;
 
 namespace CodingDojo3.ViewModel
 {
     class StockEntryViewModel : BaseViewModel
-    { 
+    {
+     
         private StockEntry stockEntry;
         private List<Software> availableSoftware = new List<Software>();
         private List<Group> availableGroups = new List<Group>();
-         //private Stock currentStock;
-
-
-        //  private double salespriceInEuro;
 
         public String Name
         {
@@ -45,15 +43,23 @@ namespace CodingDojo3.ViewModel
             }
         }
 
+        public double SalesPrice1 { get; set; }
+        public double PurchasePrice1 { get; set; }
+
+
+
         public double PurchasePrice
         {
             get { return stockEntry.SoftwarePackage.PurchasePrice; }
             set
             {
-                stockEntry.SoftwarePackage.SalesPrice = value;
-                onChange("SalesPrice");
+                stockEntry.SoftwarePackage.PurchasePrice = value;
+                onChange("PurchasePrice");
             }
         }
+
+     
+
 
         public int OnStock
         {
@@ -72,8 +78,22 @@ namespace CodingDojo3.ViewModel
         {
           
             stockEntry = entry;
+            this.SalesPrice1 = entry.SoftwarePackage.SalesPrice;
+            this.PurchasePrice1 = entry.SoftwarePackage.PurchasePrice;
         }
 
        
+
+        public String toString()
+        {
+            return this.Name +" -  "+this.Group;
+        }
+
+      /*  public void CalculateSalesPriceFromEuro(Currencies currency)
+        {
+            this.SalesPrice = CurrencyConverter.ConvertFromEuroTo(currency,prices);
+        }*/
+
+
     }
 }

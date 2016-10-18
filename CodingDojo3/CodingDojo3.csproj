@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\PriceConverter.cs" />
     <Compile Include="Converters\IntTobrushConverter.cs" />
     <Compile Include="Dataoperations\Dataoperation.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />

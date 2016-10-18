@@ -21,6 +21,7 @@ namespace CodingDojo3.Dataoperations
         {
             availableSoftware.Add(new Software("New Software"));
             availableGroups.Add(new Group()
+
             {
                 Name = "New Group",
                 Software = new List<Software>()
@@ -32,7 +33,6 @@ namespace CodingDojo3.Dataoperations
             availableSoftware[0].Category = availableGroups.Last();
             currentStock = new Stock();
             StockEntry st= new StockEntry() { SoftwarePackage = availableSoftware[0], Amount = 0 };
-            //currentStock.OnStock.Add(st);
             return st;
           
         }

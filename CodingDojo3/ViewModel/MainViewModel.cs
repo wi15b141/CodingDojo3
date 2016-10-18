@@ -24,23 +24,17 @@ namespace CodingDojo3.ViewModel
             set
             {
                 selectedCurrency = value;
-                //OnChange("SelectedCurrency");
-                this.DoCalculation();
+                onChange("SelectedCurrency");
+                
             }
         }
 
-        private void DoCalculation()
-        {
-            foreach (var item in Items1)
-            {
-                //item.CalculateSalesPriceFromEuro(SelectedCurrency);
-            }
-        }
+      
 
         private List<StockEntry> stock;
         private ObservableCollection<StockEntryViewModel> items = new ObservableCollection<StockEntryViewModel>();
         private Currencies selectedCurrency;
-
+       
         public ObservableCollection<StockEntryViewModel> Items1
         {
             get { return items; }
@@ -50,43 +44,36 @@ namespace CodingDojo3.ViewModel
         }
 
     
+        public void loaditems()
+        {
+
+                SampleManager manager = new SampleManager();
+                stock = manager.CurrentStock.OnStock;
+
+                foreach (var item in stock)
+                {
+                    Items1.Add(new StockEntryViewModel(item));
+                }
+
+        }
+    
         public MainViewModel()
+        {
+           loaditems(); 
+        }
+
+        public ObservableCollection<StockEntryViewModel> load_items()
         {
             SampleManager manager = new SampleManager();
             stock = manager.CurrentStock.OnStock;
             Dataoperations.Dataoperation dop = new Dataoperation();
-
             foreach (var item in stock)
             {
-
                 Items1.Add(new StockEntryViewModel(item));
-
             }
-           // Items1.Add(new StockEntryViewModel(dop.add_new_item()));
+
+            return Items1;
         }
 
-      
-
-        public void add_item()
-        {
-
-
-
-                SampleManager manager = new SampleManager();
-                stock = manager.CurrentStock.OnStock;
-                Dataoperations.Dataoperation dop = new Dataoperation();
-
-                /*foreach (var item in stock)
-                {
-
-                    Items1.Add(new StockEntryViewModel(item));
-
-                }*/
-                Items1.Add(new StockEntryViewModel(dop.add_new_item()));
-                
-           
-        }
-         
-       
     }
 }
