@@ -48,6 +48,7 @@ namespace CodingDojo3.ViewModel
 
 
 
+
         public double PurchasePrice
         {
             get { return stockEntry.SoftwarePackage.PurchasePrice; }
